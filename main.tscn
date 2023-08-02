@@ -1,0 +1,278 @@
+[gd_scene load_steps=33 format=3 uid="uid://bkg4piaqm71jd"]
+
+[ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
+[ext_resource type="Script" path="res://Session.gd" id="2_34p5t"]
+[ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
+[ext_resource type="Script" path="res://HaggleDialogue.gd" id="2_ednya"]
+[ext_resource type="Script" path="res://HaggleHandler.gd" id="3_fgdmh"]
+[ext_resource type="Script" path="res://PlayerMoney.gd" id="3_gkfpa"]
+[ext_resource type="Script" path="res://HaggleTextInput.gd" id="3_temdj"]
+[ext_resource type="Script" path="res://HagglePriceSubmitButton.gd" id="3_xixw3"]
+[ext_resource type="Script" path="res://AcceptButton.gd" id="3_xpb7v"]
+[ext_resource type="Script" path="res://UiController.gd" id="4_gyk34"]
+[ext_resource type="Script" path="res://RejectButton.gd" id="4_pxu0j"]
+[ext_resource type="Script" path="res://NoCustomerText.gd" id="5_tcgji"]
+[ext_resource type="Script" path="res://HaggleButton.gd" id="5_v4uns"]
+[ext_resource type="Script" path="res://InventoryMenuButton.gd" id="8_kyg2q"]
+[ext_resource type="Script" path="res://TransactionController.gd" id="8_tfsva"]
+[ext_resource type="Script" path="res://CustomerButton.gd" id="8_tlp10"]
+[ext_resource type="Script" path="res://SkillsButton.gd" id="9_hdrb1"]
+[ext_resource type="Script" path="res://Player.gd" id="12_72tpr"]
+[ext_resource type="Script" path="res://MarketController.gd" id="12_j5mrg"]
+[ext_resource type="Script" path="res://NextDayButton.gd" id="13_sd3cs"]
+[ext_resource type="Script" path="res://EventMenuContinueButton.gd" id="14_62gpv"]
+[ext_resource type="Script" path="res://MarketModifier.gd" id="15_11u8i"]
+[ext_resource type="Script" path="res://SkillMenuExitButton.gd" id="15_jn4gd"]
+[ext_resource type="Script" path="res://InventoryDisplayController.gd" id="16_nnymj"]
+[ext_resource type="Script" path="res://EventMenuHandler.gd" id="19_r4tvf"]
+[ext_resource type="Script" path="res://MenuHandler.gd" id="20_ovbqy"]
+[ext_resource type="Script" path="res://Calendar.gd" id="21_0kit7"]
+[ext_resource type="Script" path="res://DayEndMenuHandler.gd" id="22_a0n6j"]
+[ext_resource type="Script" path="res://SkillMenuHandler.gd" id="22_miw3l"]
+[ext_resource type="Script" path="res://MarketEvents.gd" id="23_18j8a"]
+[ext_resource type="Script" path="res://Metrics.gd" id="23_chesr"]
+
+[sub_resource type="Theme" id="Theme_3eiwv"]
+
+[node name="Main" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BottomMenu" type="TabContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -158.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+tabs_visible = false
+script = ExtResource("1_exgn3")
+
+[node name="HaggleDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
+layout_mode = 2
+theme = SubResource("Theme_3eiwv")
+script = ExtResource("2_ednya")
+
+[node name="HaggleTextInput" type="LineEdit" parent="Control/BottomMenu/HaggleDialogue"]
+layout_mode = 2
+placeholder_text = "Haggle! Enter your proposed price here. "
+clear_button_enabled = true
+script = ExtResource("3_temdj")
+
+[node name="HagglePriceSubmitButton" type="Button" parent="Control/BottomMenu/HaggleDialogue"]
+layout_mode = 2
+text = "Submit!"
+script = ExtResource("3_xixw3")
+
+[node name="CustomerDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
+visible = false
+layout_mode = 2
+
+[node name="CustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
+layout_mode = 2
+fit_content = true
+
+[node name="NoCustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
+layout_mode = 2
+text = "No Active Customer!"
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_tcgji")
+
+[node name="SideMenu" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PlayerMoney" type="RichTextLabel" parent="Control/SideMenu"]
+layout_mode = 2
+fit_content = true
+tab_size = 7
+script = ExtResource("3_gkfpa")
+
+[node name="NextCustomerButton" type="Button" parent="Control/SideMenu"]
+layout_mode = 2
+text = "Next Customer"
+script = ExtResource("2_b2c4n")
+
+[node name="InventoryMenuButton" type="Button" parent="Control/SideMenu"]
+layout_mode = 2
+text = "Inventory"
+script = ExtResource("8_kyg2q")
+
+[node name="SkillsButton" type="Button" parent="Control/SideMenu"]
+layout_mode = 2
+text = "Skills"
+script = ExtResource("9_hdrb1")
+
+[node name="CustomerInteractionMenu" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 273.0
+offset_bottom = 31.0
+scale = Vector2(1.19068, 1.22042)
+
+[node name="AcceptButton" type="Button" parent="Control/CustomerInteractionMenu"]
+layout_mode = 2
+text = "Accept"
+script = ExtResource("3_xpb7v")
+
+[node name="RejectButton" type="Button" parent="Control/CustomerInteractionMenu"]
+layout_mode = 2
+text = "Reject"
+script = ExtResource("4_pxu0j")
+
+[node name="HaggleButton" type="Button" parent="Control/CustomerInteractionMenu"]
+layout_mode = 2
+text = "Haggle"
+script = ExtResource("5_v4uns")
+
+[node name="CustomerButton" type="Button" parent="Control/CustomerInteractionMenu"]
+layout_mode = 2
+text = "Customer"
+script = ExtResource("8_tlp10")
+
+[node name="AlertPopup" type="Popup" parent="Control"]
+initial_position = 1
+title = "Alert!"
+size = Vector2i(500, 500)
+borderless = false
+
+[node name="InventoryMarginContainer" type="MarginContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginPanel" type="Panel" parent="Control/InventoryMarginContainer"]
+layout_mode = 2
+
+[node name="InventoryContainer" type="HBoxContainer" parent="Control/InventoryMarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="ItemsContainer" type="VBoxContainer" parent="Control/InventoryMarginContainer/InventoryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DayEndMenu" type="MarginContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+
+[node name="MarginPanel" type="Panel" parent="Control/DayEndMenu"]
+layout_mode = 2
+
+[node name="DayEndMenuContainer" type="VBoxContainer" parent="Control/DayEndMenu"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="NextDayButton" type="Button" parent="Control/DayEndMenu/DayEndMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.0
+text = "Next Day"
+script = ExtResource("13_sd3cs")
+
+[node name="EventMenu" type="MarginContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+
+[node name="MarginPanel" type="Panel" parent="Control/EventMenu"]
+layout_mode = 2
+
+[node name="EventMenuContainer" type="VBoxContainer" parent="Control/EventMenu"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="EventMenuContinueButton" type="Button" parent="Control/EventMenu/EventMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.0
+text = "Next Day"
+script = ExtResource("14_62gpv")
+
+[node name="SkillMenu" type="MarginContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+
+[node name="MarginPanel" type="Panel" parent="Control/SkillMenu"]
+layout_mode = 2
+
+[node name="SkillMenuContainer" type="VBoxContainer" parent="Control/SkillMenu"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="SkillMenuExitButton" type="Button" parent="Control/SkillMenu/SkillMenuContainer"]
+layout_mode = 2
+script = ExtResource("15_jn4gd")
+
+[node name="GameLogic" type="Node" parent="."]
+
+[node name="Session" type="Node" parent="GameLogic"]
+script = ExtResource("2_34p5t")
+
+[node name="HaggleHandler" type="Node" parent="GameLogic"]
+script = ExtResource("3_fgdmh")
+
+[node name="UiController" type="Node" parent="GameLogic"]
+script = ExtResource("4_gyk34")
+
+[node name="InventoryDisplayController" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("16_nnymj")
+
+[node name="DayEndMenuHandler" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("22_a0n6j")
+
+[node name="EventMenuHandler" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("19_r4tvf")
+
+[node name="MenuHandler" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("20_ovbqy")
+
+[node name="SkillMenuHandler" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("22_miw3l")
+
+[node name="TransactionController" type="Node" parent="GameLogic"]
+script = ExtResource("8_tfsva")
+
+[node name="Player" type="Node" parent="GameLogic"]
+script = ExtResource("12_72tpr")
+
+[node name="MarketController" type="Node" parent="GameLogic"]
+script = ExtResource("12_j5mrg")
+
+[node name="MarketModifier" type="Node" parent="GameLogic"]
+script = ExtResource("15_11u8i")
+
+[node name="MarketEvents" type="Node" parent="GameLogic/MarketModifier"]
+script = ExtResource("23_18j8a")
+
+[node name="Calendar" type="Node" parent="GameLogic"]
+script = ExtResource("21_0kit7")
+
+[node name="Metrics" type="Node" parent="GameLogic"]
+script = ExtResource("23_chesr")
