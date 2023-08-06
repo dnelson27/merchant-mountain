@@ -4,6 +4,7 @@ class_name TransactionController
 
 signal new_transaction
 signal reset_haggle_count
+signal haggle_completed
 
 # Transaction Class
 enum TRANSACTION_STATUS {TRANSACTION_STATUS_ACTIVE, TRANSACTION_STATUS_INACTIVE}
@@ -88,6 +89,7 @@ func _reject_button_pressed():
 	reject_transaction()
 	
 func set_haggle_complete():
+	haggle_completed.emit()
 	haggle_complete = true
 	
 

@@ -10,9 +10,10 @@ var customer_text: RichTextLabel
 var player: Player
 var player_money: RichTextLabel
 var transaction_controller: TransactionController
-var HAGGLE_TAB_INDEX = 1
+var haggle_dialogue: HaggleDialogue
 var CUSTOMER_TAB_INDEX = 0
 var alert_window: Popup
+var market_modifier: MarketModifier
 
 signal refresh_customer_text
 signal refresh_player_money
@@ -23,6 +24,7 @@ signal show_haggle_already_complete
 
 var current_item_display_name = ""
 var current_price = 0
+var haggle_active = false
 func _process(delta):
 	if transaction_controller == null || transaction_controller.transaction == null || transaction_controller.transaction.item == null:
 		return
@@ -34,6 +36,8 @@ func _process(delta):
 		current_price = transaction_controller.transaction.item.customer_asking_price
 		current_item_display_name = transaction_controller.transaction.item.display_name
 		customer_text.text = _generate_customer_text()
+		
+	_maybe_show_haggle_menu()
 		
 func _refresh_customer_text():
 	customer_text.text = _generate_customer_text()
@@ -53,14 +57,15 @@ func _ready():
 	next_customer_button = get_parent().get_parent().get_node("Control/SideMenu/NextCustomerButton")
 	haggle_button = get_parent().get_parent().get_node("Control/CustomerInteractionMenu/HaggleButton")
 	customer_button = get_parent().get_parent().get_node("Control/CustomerInteractionMenu/CustomerButton")
-	
+	haggle_dialogue = get_parent().get_parent().get_node("Control/BottomMenu/CustomerDialogue/HaggleDialogue")
+	market_modifier = get_parent().get_node("MarketModifier")
 	bottom_menu = get_parent().get_parent().get_node("Control/BottomMenu")
 	customer_text = get_parent().get_parent().get_node("Control/BottomMenu/CustomerDialogue/CustomerText")
 	player = get_parent().get_node("Player")
 	player_money = get_parent().get_parent().get_node("Control/SideMenu/PlayerMoney")
 	transaction_controller = get_parent().get_node("TransactionController")
 	
-	haggle_button.show_haggle_menu.connect(_show_haggle_menu)
+	haggle_button.show_haggle_menu.connect(_start_haggle)
 	next_customer_button.user_next_customer_pressed.connect(_hide_no_customer_text)
 	self.show_customer_interaction_menu.connect(_show_customer_interaction_menu)
 	
@@ -68,10 +73,17 @@ func _ready():
 	self.refresh_player_money.connect(_refresh_player_money)
 	self.show_no_customer_text.connect(_show_no_customer_text)
 	self.show_haggle_already_complete.connect(_show_haggle_already_complete)
+	transaction_controller.haggle_completed.connect(_end_haggle)
 	_show_customer_interaction_menu()
 	
 func _show_no_customer_text():
 	pass
+	
+func _start_haggle():
+	haggle_active = true
+
+func _end_haggle():
+	haggle_active = false
 
 func _show_haggle_already_complete():
 	var label = RichTextLabel.new()
@@ -88,9 +100,11 @@ func _show_customer_interaction_menu():
 func _hide_no_customer_text():
 	hide_no_customer_text.emit()
 	
-func _show_haggle_menu():
-	if _transaction_active():
-		bottom_menu.current_tab = HAGGLE_TAB_INDEX
+func _maybe_show_haggle_menu():
+	if haggle_active:
+		haggle_dialogue.visible = true
+	else:
+		haggle_dialogue.visible = false
 
 func _transaction_active() -> bool:
 	return transaction_controller.transaction.status == transaction_controller.TRANSACTION_STATUS.TRANSACTION_STATUS_ACTIVE

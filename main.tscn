@@ -75,19 +75,19 @@ fit_content = true
 autowrap_mode = 0
 script = ExtResource("5_tcgji")
 
-[node name="HaggleDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
+[node name="HaggleDialogue" type="VBoxContainer" parent="Control/BottomMenu/CustomerDialogue"]
 visible = false
 layout_mode = 2
 theme = SubResource("Theme_3eiwv")
 script = ExtResource("2_ednya")
 
-[node name="HaggleTextInput" type="LineEdit" parent="Control/BottomMenu/HaggleDialogue"]
+[node name="HaggleTextInput" type="LineEdit" parent="Control/BottomMenu/CustomerDialogue/HaggleDialogue"]
 layout_mode = 2
 placeholder_text = "Haggle! Enter your proposed price here. "
 clear_button_enabled = true
 script = ExtResource("3_temdj")
 
-[node name="HagglePriceSubmitButton" type="Button" parent="Control/BottomMenu/HaggleDialogue"]
+[node name="HagglePriceSubmitButton" type="Button" parent="Control/BottomMenu/CustomerDialogue/HaggleDialogue"]
 layout_mode = 2
 text = "Submit!"
 script = ExtResource("3_xixw3")

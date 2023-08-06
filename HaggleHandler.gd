@@ -18,11 +18,11 @@ var max_haggle_attempts = 3
 # "Stubborn" or "Timid" that could hint at their wiggle, but the player has to check to know for sure. THese checks could be limited per day
 
 func _ready():
-	haggle_price_submit_button = get_parent().get_parent().get_node("Control/BottomMenu/HaggleDialogue/HagglePriceSubmitButton")
+	haggle_price_submit_button = get_parent().get_parent().get_node("Control/BottomMenu/CustomerDialogue/HaggleDialogue/HagglePriceSubmitButton")
 	haggle_price_submit_button.haggle_submit_pressed.connect(_haggle_submit_pressed)
 	transaction_controller = get_parent().get_node("TransactionController")
 	transaction_controller.reset_haggle_count.connect(_reset_haggle_counter)
-	haggle_text_input = get_parent().get_parent().get_node("Control/BottomMenu/HaggleDialogue/HaggleTextInput")
+	haggle_text_input = get_parent().get_parent().get_node("Control/BottomMenu/CustomerDialogue/HaggleDialogue/HaggleTextInput")
 
 func _reset_haggle_counter():
 	haggle_count = 0
@@ -51,9 +51,7 @@ func _haggle_submit_pressed():
 	)
 	
 	var roll = rng.randi_range(0, 10)
-	
-	print("Rolled a %s needed a %s" % [roll, min_roll])
-	
+	print("Rolled %s Needed %s" % [roll, min_roll])
 	if roll >= min_roll:
 		transaction_controller.update_price(value)
 		transaction_controller.set_haggle_complete()
@@ -74,11 +72,6 @@ func get_haggle_min_roll(currentValue, proposedPrice, wiggle) -> int:
 	var maxDelta = currentValue * wigglePercent
 	var diff = abs(proposedPrice - currentValue)
 	
-	# TODO to prevent infinitely haggling to 0, we should store the original price - maxDelta after the first haggle
-	
-	print("float(%s) / 100 = %s" % [str(wiggle), str(wigglePercent)])
-	print("diff = %s" % str(diff))
-
 	# If the proposed value is beyond the customer's wiggle room, haggle is impossible
 	if maxDelta < diff:
 		return 11

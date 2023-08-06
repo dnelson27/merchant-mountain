@@ -86,7 +86,7 @@ func item_rarity_modifier(attributes) -> int:
 	var modifier = 0
 	var rarity = attributes["rarity"]
 	if rarity != null:
-		modifier = (10 * rarity) + (_rarity_variance(rarity) * randi_range(-1, 1))
+		modifier = (10 * rarity) + (_rarity_variance(rarity) * randi_range(1, -1))
 	return modifier
 	
 func _rarity_variance(rarity: int):
