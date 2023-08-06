@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://bkg4piaqm71jd"]
+[gd_scene load_steps=35 format=3 uid="uid://bkg4piaqm71jd"]
 
 [ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
-[ext_resource type="Script" path="res://Session.gd" id="2_34p5t"]
 [ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
 [ext_resource type="Script" path="res://HaggleDialogue.gd" id="2_ednya"]
 [ext_resource type="Script" path="res://HaggleHandler.gd" id="3_fgdmh"]
@@ -31,6 +30,9 @@
 [ext_resource type="Script" path="res://SkillMenuHandler.gd" id="22_miw3l"]
 [ext_resource type="Script" path="res://MarketEvents.gd" id="23_18j8a"]
 [ext_resource type="Script" path="res://Metrics.gd" id="23_chesr"]
+[ext_resource type="Script" path="res://Skills.gd" id="26_6u4lw"]
+[ext_resource type="Script" path="res://UpgradeController.gd" id="31_47gj4"]
+[ext_resource type="Script" path="res://ExpensesController.gd" id="32_vxovv"]
 
 [sub_resource type="Theme" id="Theme_3eiwv"]
 
@@ -232,9 +234,6 @@ script = ExtResource("15_jn4gd")
 
 [node name="GameLogic" type="Node" parent="."]
 
-[node name="Session" type="Node" parent="GameLogic"]
-script = ExtResource("2_34p5t")
-
 [node name="HaggleHandler" type="Node" parent="GameLogic"]
 script = ExtResource("3_fgdmh")
 
@@ -262,6 +261,9 @@ script = ExtResource("8_tfsva")
 [node name="Player" type="Node" parent="GameLogic"]
 script = ExtResource("12_72tpr")
 
+[node name="Skills" type="Node" parent="GameLogic/Player"]
+script = ExtResource("26_6u4lw")
+
 [node name="MarketController" type="Node" parent="GameLogic"]
 script = ExtResource("12_j5mrg")
 
@@ -276,3 +278,9 @@ script = ExtResource("21_0kit7")
 
 [node name="Metrics" type="Node" parent="GameLogic"]
 script = ExtResource("23_chesr")
+
+[node name="UpgradeController" type="Node" parent="GameLogic"]
+script = ExtResource("31_47gj4")
+
+[node name="ExpensesController" type="Node" parent="GameLogic"]
+script = ExtResource("32_vxovv")

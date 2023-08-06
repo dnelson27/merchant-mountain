@@ -7,9 +7,13 @@ signal player_bought(item)
 
 var stock = {}
 var money = 0
+var skills: Skills
+var upgrade_controller: UpgradeController
 
 func _ready():
-	pass
+	upgrade_controller = get_parent().get_node("UpgradeController")
+	skills = get_node("Skills")
+	upgrade_controller.destroy_item.connect(_remove_stock)
 
 func customer_sold(item: TransactionController.Item):
 	money -= item.customer_asking_price

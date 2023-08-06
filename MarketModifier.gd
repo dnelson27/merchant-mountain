@@ -69,7 +69,7 @@ func calculate_owned_item_price(purchase_base_price: int, attributes: Dictionary
 
 # Returns the base price (which cannot be adjusted later) along with the adjusted price (which can be adjusted later)
 func calculate_new_item_price(attributes: Dictionary) -> Dictionary:
-	var base_price = _rarity_modifier(attributes)
+	var base_price = item_rarity_modifier(attributes)
 	var adjusted_price = base_price + _type_modifier(attributes)
 	return {
 		"base_price": base_price,
@@ -82,7 +82,7 @@ func price_with_markup(attributes, bought_price) -> int:
 func _owned_item_modifier(attributes: Dictionary):
 	return _type_modifier(attributes)
 
-func _rarity_modifier(attributes) -> int:
+func item_rarity_modifier(attributes) -> int:
 	var modifier = 0
 	var rarity = attributes["rarity"]
 	if rarity != null:

@@ -1,4 +1,4 @@
-extends Node
+extends MenuHandler
 
 class_name DayEndMenuHandler
 
@@ -6,27 +6,26 @@ signal show_day_end_menu
 signal collect_day_end_metrics
 
 var day_end_menu_container: VBoxContainer
-var day_end_menu_margin_container: MarginContainer
 var next_day_button: NextDayButton
 var metrics: Metrics
-var nodes_to_dequeue = []
 
 func _input(event):
-	if event is InputEventKey && event.as_text_keycode() == "Escape":
-		next_day_button.next_day_clicked.emit()
+	if parent_margin_container != null:
+		if parent_margin_container.visible && event is InputEventKey && event.as_text_keycode() == "Escape":
+			next_day_button.next_day_clicked.emit()
 
 func _ready():
 	day_end_menu_container = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu/DayEndMenuContainer")
-	day_end_menu_margin_container = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu")
+	parent_margin_container = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu")
 	next_day_button = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu/DayEndMenuContainer/NextDayButton")
 	metrics = get_parent().get_parent().get_node("Metrics")
 	next_day_button.next_day_clicked.connect(_clear)
 	self.show_day_end_menu.connect(_show_day_end_menu)
-	day_end_menu_margin_container.visible = false
+	parent_margin_container.visible = false
 	
 func _show_day_end_menu():
 	collect_day_end_metrics.emit()
-	day_end_menu_margin_container.visible = true
+	parent_margin_container.visible = true
 	day_end_menu_container.add_child(_new_label("Day Ended"))
 
 	for metric_item in _generate_metric_items():
@@ -72,10 +71,3 @@ func _display_bought_items_list(items):
 	for item in items:
 		result.append(_new_label("	%s bought for %s" % [item.display_name, item.price_bought]))
 	return result
-
-func _clear():
-	day_end_menu_margin_container.visible = false
-	if len(nodes_to_dequeue) > 0:
-		for node in nodes_to_dequeue:
-			node.queue_free()
-	nodes_to_dequeue = []

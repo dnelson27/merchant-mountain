@@ -51,9 +51,12 @@ var mount_type = "mount"
 var types = [weapon_type, potion_type, mount_type]
 
 var market_modifier: MarketModifier
+var upgrade_controller: UpgradeController
 
 func _ready():
+	upgrade_controller = get_parent().get_node("UpgradeController")
 	market_modifier = get_parent().get_node("MarketModifier")
+	upgrade_controller.recalculate_item_price.connect(_recalculate_item_price)
 	
 func _get_rarity_string(rarity: int):
 	match rarity:
@@ -137,7 +140,11 @@ func pick_stock(transaction_controller: TransactionController):
 	var item = items[stock_key]
 	item.customer_asking_price = market_modifier.calculate_owned_item_price(item.base_price, item.attributes)
 	return item
-	
+
+func _recalculate_item_price(item):
+	item.display_name = _generate_item_name(item.attributes["type"], item.attributes["rarity"])
+	item.base_price = market_modifier.item_rarity_modifier(item.attributes)
+
 func _weighted_random_choice():
 	var options = types
 	var weights = market_modifier.item_type_pull_modifiers.weights.values()

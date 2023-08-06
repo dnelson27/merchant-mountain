@@ -110,7 +110,6 @@ func complete_transaction():
 	if daily_transactions == max_daily_transactions:
 		calendar.day_end.emit()
 		daily_transactions = 0
-		
 
 func _user_next_customer_pressed():
 	if transaction.status == TRANSACTION_STATUS.TRANSACTION_STATUS_INACTIVE:
@@ -126,4 +125,3 @@ func _user_next_customer_pressed():
 		ui_controller.refresh_player_money.emit()
 		ui_controller.refresh_customer_text.emit()
 		haggle_complete = false
-		
