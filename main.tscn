@@ -61,7 +61,22 @@ grow_vertical = 0
 tabs_visible = false
 script = ExtResource("1_exgn3")
 
+[node name="CustomerDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
+layout_mode = 2
+
+[node name="CustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
+layout_mode = 2
+fit_content = true
+
+[node name="NoCustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
+layout_mode = 2
+text = "No Active Customer!"
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_tcgji")
+
 [node name="HaggleDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
+visible = false
 layout_mode = 2
 theme = SubResource("Theme_3eiwv")
 script = ExtResource("2_ednya")
@@ -76,21 +91,6 @@ script = ExtResource("3_temdj")
 layout_mode = 2
 text = "Submit!"
 script = ExtResource("3_xixw3")
-
-[node name="CustomerDialogue" type="VBoxContainer" parent="Control/BottomMenu"]
-visible = false
-layout_mode = 2
-
-[node name="CustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
-layout_mode = 2
-fit_content = true
-
-[node name="NoCustomerText" type="RichTextLabel" parent="Control/BottomMenu/CustomerDialogue"]
-layout_mode = 2
-text = "No Active Customer!"
-fit_content = true
-autowrap_mode = 0
-script = ExtResource("5_tcgji")
 
 [node name="SideMenu" type="VBoxContainer" parent="Control"]
 layout_mode = 1

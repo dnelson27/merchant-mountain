@@ -10,8 +10,8 @@ var customer_text: RichTextLabel
 var player: Player
 var player_money: RichTextLabel
 var transaction_controller: TransactionController
-var HAGGLE_TAB_INDEX = 0
-var CUSTOMER_TAB_INDEX = 1
+var HAGGLE_TAB_INDEX = 1
+var CUSTOMER_TAB_INDEX = 0
 var alert_window: Popup
 
 signal refresh_customer_text
@@ -21,6 +21,20 @@ signal hide_no_customer_text
 signal show_no_customer_text
 signal show_haggle_already_complete
 
+var current_item_display_name = ""
+var current_price = 0
+func _process(delta):
+	if transaction_controller == null || transaction_controller.transaction == null || transaction_controller.transaction.item == null:
+		return
+	
+	if !_transaction_active():
+		customer_text.text = _generate_customer_text()
+	
+	if transaction_controller.transaction.item.display_name != current_item_display_name || transaction_controller.transaction.item.customer_asking_price != current_price:
+		current_price = transaction_controller.transaction.item.customer_asking_price
+		current_item_display_name = transaction_controller.transaction.item.display_name
+		customer_text.text = _generate_customer_text()
+		
 func _refresh_customer_text():
 	customer_text.text = _generate_customer_text()
 	

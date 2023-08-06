@@ -142,7 +142,10 @@ func pick_stock(transaction_controller: TransactionController):
 	return item
 
 func _recalculate_item_price(item):
-	item.display_name = _generate_item_name(item.attributes["type"], item.attributes["rarity"])
+	var rarity_str = _get_rarity_string(item.attributes["rarity"])
+	var name_array = item.display_name.split(" ")
+	
+	item.display_name = "%s %s %s %s" % [rarity_str, name_array[1], name_array[2], name_array[3]]
 	item.base_price = market_modifier.item_rarity_modifier(item.attributes)
 
 func _weighted_random_choice():

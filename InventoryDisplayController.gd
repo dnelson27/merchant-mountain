@@ -27,7 +27,12 @@ class ItemRow extends RichTextLabel:
 class ItemButton extends Button:
 	var item
 	var display_controller: InventoryDisplayController
-		
+	
+	func _process(delta):
+		if item != null:
+			if item.display_name != text:
+				text = item.display_name
+	
 	func _init(new_item, new_display_controller):
 		text = new_item.display_name
 		item = new_item
