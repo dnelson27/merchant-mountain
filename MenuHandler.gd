@@ -4,6 +4,13 @@ class_name MenuHandler
 var nodes_to_dequeue = []
 var parent_margin_container: MarginContainer
 
+func _new_labeL_container(text: String) -> MarginContainer:
+	var res = MarginContainer.new()
+	res.size_flags_horizontal = Control.SIZE_EXPAND_FILL	
+	nodes_to_dequeue.append(res)
+	res.add_child(_new_label(text))
+	return res
+
 func _new_label(text) -> RichTextLabel:
 	var label = RichTextLabel.new()
 	nodes_to_dequeue.append(label)

@@ -7,6 +7,7 @@ signal collect_day_end_metrics
 
 var day_end_menu_container: VBoxContainer
 var next_day_button: NextDayButton
+var calendar: Calendar
 var metrics: Metrics
 
 func _input(event):
@@ -19,6 +20,7 @@ func _ready():
 	parent_margin_container = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu")
 	next_day_button = get_parent().get_parent().get_parent().get_node("Control/DayEndMenu/DayEndMenuContainer/NextDayButton")
 	metrics = get_parent().get_parent().get_node("Metrics")
+	calendar = get_parent().get_parent().get_node("Calendar")
 	next_day_button.next_day_clicked.connect(_clear)
 	self.show_day_end_menu.connect(_show_day_end_menu)
 	parent_margin_container.visible = false
@@ -26,7 +28,7 @@ func _ready():
 func _show_day_end_menu():
 	collect_day_end_metrics.emit()
 	parent_margin_container.visible = true
-	day_end_menu_container.add_child(_new_label("Day Ended"))
+	day_end_menu_container.add_child(_new_label("Day %s Ended" % calendar.current_day))
 
 	for metric_item in _generate_metric_items():
 		day_end_menu_container.add_child(metric_item)
@@ -54,6 +56,7 @@ func _generate_metric_items():
 				metric_items += _display_sold_item_list(value)
 			_:		
 				metric_items.append(_new_label("%s: %s" % [key, value]))
+			
 
 	return metric_items
 

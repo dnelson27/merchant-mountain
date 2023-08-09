@@ -47,7 +47,7 @@ func _haggle_submit_pressed():
 	var min_roll = get_haggle_min_roll(
 		transaction_controller.transaction.item.customer_asking_price,
 		value,
-		25,
+		transaction_controller.transaction.customer_wiggle,
 	)
 	
 	var roll = rng.randi_range(0, 10)

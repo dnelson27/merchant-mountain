@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkg4piaqm71jd"]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
 [ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
@@ -15,21 +15,21 @@
 [ext_resource type="Script" path="res://InventoryMenuButton.gd" id="8_kyg2q"]
 [ext_resource type="Script" path="res://TransactionController.gd" id="8_tfsva"]
 [ext_resource type="Script" path="res://CustomerButton.gd" id="8_tlp10"]
-[ext_resource type="Script" path="res://StoreManagementButton.gd" id="9_tq814"]
+[ext_resource type="Script" path="res://SkillsButton.gd" id="9_hdrb1"]
 [ext_resource type="Script" path="res://Player.gd" id="12_72tpr"]
 [ext_resource type="Script" path="res://MarketController.gd" id="12_j5mrg"]
 [ext_resource type="Script" path="res://NextDayButton.gd" id="13_sd3cs"]
 [ext_resource type="Script" path="res://EventMenuContinueButton.gd" id="14_62gpv"]
 [ext_resource type="Script" path="res://MarketModifier.gd" id="15_11u8i"]
-[ext_resource type="Script" path="res://StoreManagementExitButton.gd" id="16_02e4e"]
+[ext_resource type="Script" path="res://StoreManagementExitButton.gd" id="15_jn4gd"]
 [ext_resource type="Script" path="res://InventoryDisplayController.gd" id="16_nnymj"]
 [ext_resource type="Script" path="res://EventMenuHandler.gd" id="19_r4tvf"]
 [ext_resource type="Script" path="res://MenuHandler.gd" id="20_ovbqy"]
 [ext_resource type="Script" path="res://Calendar.gd" id="21_0kit7"]
 [ext_resource type="Script" path="res://DayEndMenuHandler.gd" id="22_a0n6j"]
+[ext_resource type="Script" path="res://SkillMenuHandler.gd" id="22_miw3l"]
 [ext_resource type="Script" path="res://MarketEvents.gd" id="23_18j8a"]
 [ext_resource type="Script" path="res://Metrics.gd" id="23_chesr"]
-[ext_resource type="Script" path="res://StoreManagementMenuHandler.gd" id="23_d1xg3"]
 [ext_resource type="Script" path="res://Skills.gd" id="26_6u4lw"]
 [ext_resource type="Script" path="res://UpgradeController.gd" id="31_47gj4"]
 [ext_resource type="Script" path="res://ExpensesController.gd" id="32_vxovv"]
@@ -121,7 +121,7 @@ script = ExtResource("8_kyg2q")
 [node name="StoreManagementButton" type="Button" parent="Control/SideMenu"]
 layout_mode = 2
 text = "Store Management"
-script = ExtResource("9_tq814")
+script = ExtResource("9_hdrb1")
 
 [node name="CustomerInteractionMenu" type="HBoxContainer" parent="Control"]
 layout_mode = 0
@@ -215,23 +215,23 @@ size_flags_stretch_ratio = 0.0
 text = "Next Day"
 script = ExtResource("14_62gpv")
 
-[node name="StoreManagementMenu" type="MarginContainer" parent="Control"]
+[node name="SkillMenu" type="MarginContainer" parent="Control"]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 644.0
 
-[node name="MarginPanel" type="Panel" parent="Control/StoreManagementMenu"]
+[node name="MarginPanel" type="Panel" parent="Control/SkillMenu"]
 layout_mode = 2
 
-[node name="StoreManagementContainer" type="VBoxContainer" parent="Control/StoreManagementMenu"]
+[node name="SkillMenuContainer" type="VBoxContainer" parent="Control/SkillMenu"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 
-[node name="StoreManagementExitButton" type="Button" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+[node name="StoreManagementExitButton" type="Button" parent="Control/SkillMenu/SkillMenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Exit"
-script = ExtResource("16_02e4e")
+script = ExtResource("15_jn4gd")
 
 [node name="GameLogic" type="Node" parent="."]
 
@@ -253,8 +253,8 @@ script = ExtResource("19_r4tvf")
 [node name="MenuHandler" type="Node" parent="GameLogic/UiController"]
 script = ExtResource("20_ovbqy")
 
-[node name="StoreManagementMenuHandler" type="Node" parent="GameLogic/UiController"]
-script = ExtResource("23_d1xg3")
+[node name="SkillMenuHandler" type="Node" parent="GameLogic/UiController"]
+script = ExtResource("22_miw3l")
 
 [node name="TransactionController" type="Node" parent="GameLogic"]
 script = ExtResource("8_tfsva")

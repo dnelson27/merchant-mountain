@@ -1,12 +1,12 @@
 extends Button
 
-class_name SkillMenuExitButton
+class_name StoreManagementExitButton
 
-signal skill_menu_exit_clicked
+signal store_management_exit_button_cicked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.pressed.connect(_pressed)
 
 func _pressed():
-	skill_menu_exit_clicked.emit()
+	store_management_exit_button_cicked.emit()

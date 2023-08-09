@@ -24,14 +24,14 @@ func _attempt_upgrade(item: TransactionController.Item):
 	item.attributes["upgrade_attempted"] = true
 	var roll = rng.randi_range(0, 10)
 	match item.attributes["type"]:
-		"weapon": roll += player_skills.upgrade_skills.weapon
-		"potion": roll += player_skills.upgrade_skills.potion
-		"mount": roll += player_skills.upgrade_skills.mount
+		"weapon": roll += player_skills.upgrade_skills.weapon.level
+		"potion": roll += player_skills.upgrade_skills.potion.level
+		"mount": roll += player_skills.upgrade_skills.mount.level
 		
 	var rarity = item.attributes["rarity"]
 	
 	if roll >= rarity:
-		item.attributes["rarity"] = roll
+		item.attributes["rarity"] += roll
 		item.attributes["upgrade_successful"] = true
 		recalculate_item_price.emit(item)
 		return

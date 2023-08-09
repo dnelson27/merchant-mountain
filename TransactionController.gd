@@ -6,17 +6,24 @@ signal new_transaction
 signal reset_haggle_count
 signal haggle_completed
 
+
+
 # Transaction Class
 enum TRANSACTION_STATUS {TRANSACTION_STATUS_ACTIVE, TRANSACTION_STATUS_INACTIVE}
 class Transaction:
 	var status 
 	var item: Item
 	var customer_selling: bool
+	var customer_wiggle: int
+	var rng = RandomNumberGenerator.new()
+
 
 	func _init(new_status: TRANSACTION_STATUS, new_item: Item, new_customer_selling: bool):
 		status = new_status
 		if new_status == TRANSACTION_STATUS.TRANSACTION_STATUS_INACTIVE:
 			return
+		
+		customer_wiggle = rng.randi_range(10, 50)
 
 		item = new_item
 		customer_selling = new_customer_selling
