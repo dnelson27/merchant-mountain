@@ -225,13 +225,20 @@ layout_mode = 2
 
 [node name="StoreManagementContainer" type="VBoxContainer" parent="Control/StoreManagementMenu"]
 layout_mode = 2
-size_flags_stretch_ratio = 0.0
 
 [node name="StoreManagementExitButton" type="Button" parent="Control/StoreManagementMenu/StoreManagementContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Exit"
 script = ExtResource("16_02e4e")
+
+[node name="StoreUpgradesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ExpensesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="GameLogic" type="Node" parent="."]
 

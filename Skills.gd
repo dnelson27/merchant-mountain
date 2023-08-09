@@ -13,14 +13,15 @@ enum SkillKey {WEAPON_UPGRADE, POTION_UPGRADE, MOUNT_UPGRADE}
 
 class Skill:
 	var level = 0
-	var label = "ERROR"
+	var label: SkillKey
 	var upgrade_price = 0
-	var display_name = _display_name()
+	var display_name = "ERROR"
 	
 	func _init(starting_level: int, new_label: SkillKey, starting_upgrade_price: int):
 		level = starting_level
 		label = new_label
 		upgrade_price = starting_upgrade_price
+		display_name = _display_name()
 	
 	func _display_name() -> String:
 		match label:

@@ -7,7 +7,7 @@ signal player_bought(item)
 signal skill_upgrade_expense(name, price)
 
 var stock = {}
-var money = 0
+var money = 150
 var skills: Skills
 var upgrade_controller: UpgradeController
 var expenses_controller: ExpensesController
