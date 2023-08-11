@@ -24,7 +24,10 @@ func _maybe_random_event():
 	var events = []
 	var event_rarity = rng.randi_range(0, 10)
 	var event_severity = rng.randi_range(0, 10)
-	if event_rarity <= 10:
+	
+	
+	
+	if event_rarity >= 5:
 		events = [WarEvent]
 	
 	var new_event = events[rng.randi_range(0, len(events) - 1)].new(self, event_severity, calendar, market_modifier)
@@ -52,7 +55,6 @@ class Event extends Node:
 			_end_event()
 			
 	func _end_event():
-		print("ENDING EVENT")
 		market_events.active_event = false
 		self._undo_market_modifier_changes()
 		queue_free()

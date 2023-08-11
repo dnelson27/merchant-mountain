@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkg4piaqm71jd"]
+[gd_scene load_steps=38 format=3 uid="uid://bkg4piaqm71jd"]
 
 [ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
 [ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://MarketModifier.gd" id="15_11u8i"]
 [ext_resource type="Script" path="res://StoreManagementExitButton.gd" id="16_02e4e"]
 [ext_resource type="Script" path="res://InventoryDisplayController.gd" id="16_nnymj"]
+[ext_resource type="Script" path="res://GameOver.gd" id="17_pq31a"]
 [ext_resource type="Script" path="res://EventMenuHandler.gd" id="19_r4tvf"]
 [ext_resource type="Script" path="res://MenuHandler.gd" id="20_ovbqy"]
 [ext_resource type="Script" path="res://Calendar.gd" id="21_0kit7"]
@@ -33,8 +34,12 @@
 [ext_resource type="Script" path="res://Skills.gd" id="26_6u4lw"]
 [ext_resource type="Script" path="res://UpgradeController.gd" id="31_47gj4"]
 [ext_resource type="Script" path="res://ExpensesController.gd" id="32_vxovv"]
+[ext_resource type="Script" path="res://DebtController.gd" id="34_iri8e"]
 
 [sub_resource type="Theme" id="Theme_3eiwv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vtra"]
+bg_color = Color(0.101961, 0, 0.0862745, 1)
 
 [node name="Main" type="Node"]
 
@@ -240,6 +245,34 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="GameOver" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3vtra")
+script = ExtResource("17_pq31a")
+
+[node name="GameOverContainer" type="VBoxContainer" parent="Control/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/GameOver/GameOverContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/GameOver/GameOverContainer/MarginContainer"]
+layout_mode = 2
+text = "GAME OVER"
+fit_content = true
+
 [node name="GameLogic" type="Node" parent="."]
 
 [node name="HaggleHandler" type="Node" parent="GameLogic"]
@@ -292,3 +325,6 @@ script = ExtResource("31_47gj4")
 
 [node name="ExpensesController" type="Node" parent="GameLogic"]
 script = ExtResource("32_vxovv")
+
+[node name="DebtController" type="Node" parent="GameLogic"]
+script = ExtResource("34_iri8e")
