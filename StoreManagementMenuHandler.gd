@@ -38,6 +38,7 @@ class SkillUpgradeButton extends Button:
 				text = current_state
 	
 	func _ready():
+		self.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
 		self.pressed.connect(_pressed)
 	
 	func _pressed():

@@ -3,6 +3,7 @@ extends Node
 class_name MarketController
 
 var rng = RandomNumberGenerator.new()
+signal new_loan(principal)
 
 var adjectives = [
 		"Big",
@@ -85,12 +86,25 @@ var types = [weapon_type, potion_type, mount_type]
 
 var market_modifier: MarketModifier
 var upgrade_controller: UpgradeController
+var debt_controller: DebtController
 
 func _ready():
+	debt_controller = get_parent().get_node("DebtController")
 	upgrade_controller = get_parent().get_node("UpgradeController")
 	market_modifier = get_parent().get_node("MarketModifier")
 	upgrade_controller.recalculate_item_price.connect(_recalculate_item_price)
-	
+	self.new_loan.connect(_new_loan)
+
+var loan_display_counter = 1
+func _new_loan(principal: int):
+	var total = principal + calculate_loan_interest(principal)
+	debt_controller.add_debt(
+		"Loan %s" % loan_display_counter,
+		true,
+		total,
+		7,
+	)
+
 func _get_rarity_string(rarity: int):
 	match rarity:
 		2: return "Common"
@@ -197,3 +211,6 @@ func _weighted_random_choice():
 	var random_index = rng.randi_range(0, weighted_choices.size()-1)
 	var selected_option_index = weighted_choices[random_index]
 	return options[selected_option_index]
+
+func calculate_loan_interest(principal: int) -> int:
+	return int(principal * 0.15)

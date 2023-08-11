@@ -24,18 +24,18 @@ func _maybe_random_event():
 	var events = []
 	var event_rarity = rng.randi_range(0, 10)
 	var event_severity = rng.randi_range(0, 10)
-	
-	
-	
+
 	if event_rarity >= 5:
 		events = [WarEvent]
+	
+	if len(events) == 0:
+		return
 	
 	var new_event = events[rng.randi_range(0, len(events) - 1)].new(self, event_severity, calendar, market_modifier)
 	new_event.invoke()
 	event_menu_handler.show_event_menu.emit(new_event)
 
 class Event extends Node:
-	
 	var day_counter = 0
 	var severity
 	var market_modifier: MarketModifier

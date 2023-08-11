@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bkg4piaqm71jd"]
+[gd_scene load_steps=40 format=3 uid="uid://bkg4piaqm71jd"]
 
 [ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
 [ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" path="res://StoreManagementExitButton.gd" id="16_02e4e"]
 [ext_resource type="Script" path="res://InventoryDisplayController.gd" id="16_nnymj"]
 [ext_resource type="Script" path="res://GameOver.gd" id="17_pq31a"]
+[ext_resource type="Script" path="res://LoanInterestDisplay.gd" id="17_r23il"]
+[ext_resource type="Script" path="res://LoanAmountLineEdit.gd" id="18_xwuej"]
 [ext_resource type="Script" path="res://EventMenuHandler.gd" id="19_r4tvf"]
 [ext_resource type="Script" path="res://MenuHandler.gd" id="20_ovbqy"]
 [ext_resource type="Script" path="res://Calendar.gd" id="21_0kit7"]
@@ -245,7 +247,25 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Loans" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+layout_mode = 2
+
+[node name="LoanInterestDisplay" type="RichTextLabel" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+layout_mode = 2
+text = "Interest Rate: "
+fit_content = true
+script = ExtResource("17_r23il")
+
+[node name="LoanAmountLineEdit" type="LineEdit" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+layout_mode = 2
+script = ExtResource("18_xwuej")
+
+[node name="LoanSubmitButton" type="Button" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+layout_mode = 2
+text = "Submit"
+
 [node name="GameOver" type="Panel" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
