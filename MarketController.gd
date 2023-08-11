@@ -87,23 +87,41 @@ var types = [weapon_type, potion_type, mount_type]
 var market_modifier: MarketModifier
 var upgrade_controller: UpgradeController
 var debt_controller: DebtController
+var player: Player
 
 func _ready():
+	player = get_parent().get_node("Player")
 	debt_controller = get_parent().get_node("DebtController")
 	upgrade_controller = get_parent().get_node("UpgradeController")
 	market_modifier = get_parent().get_node("MarketModifier")
 	upgrade_controller.recalculate_item_price.connect(_recalculate_item_price)
 	self.new_loan.connect(_new_loan)
 
-var loan_display_counter = 1
+var loan_display_counter = 0
 func _new_loan(principal: int):
+	player.money += principal
 	var total = principal + calculate_loan_interest(principal)
+	
+	var installment_amount = int(total / 4)
+	
+	var remaining_amount = total - (installment_amount * 4)
+	
+	loan_display_counter += 1
 	debt_controller.add_debt(
 		"Loan %s" % loan_display_counter,
 		true,
-		total,
+		installment_amount + remaining_amount,
 		7,
 	)
+	
+	for i in range(3):
+		loan_display_counter += 1
+		debt_controller.add_debt(
+			"Loan %s" % loan_display_counter,
+			true,
+			installment_amount,
+			7,
+		)
 
 func _get_rarity_string(rarity: int):
 	match rarity:
