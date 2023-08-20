@@ -81,7 +81,6 @@ var potion_types = [
 var weapon_type = "weapon"
 var potion_type = "potion"
 var mount_type = "mount"
-
 var types = [weapon_type, potion_type, mount_type]
 
 var market_modifier: MarketModifier
@@ -114,13 +113,13 @@ func _new_loan(principal: int):
 		7,
 	)
 	
-	for i in range(3):
+	for i in range(2, 5):
 		loan_display_counter += 1
 		debt_controller.add_debt(
 			"Loan %s" % loan_display_counter,
 			true,
 			installment_amount,
-			7,
+			7 * i,
 		)
 
 func _get_rarity_string(rarity: int):

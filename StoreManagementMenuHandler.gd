@@ -18,9 +18,9 @@ class PayDebtButton extends Button:
 	signal debt_pay_attempted(debt)
 	
 	func _ready():
-		self.pressed.connect(_pressed)
+		self.pressed.connect(_button_pressed)
 	
-	func _pressed():
+	func _button_pressed():
 		debt_pay_attempted.emit(debt)
 		
 	func _init(button_debt: DebtController.Debt):
@@ -38,10 +38,11 @@ class SkillUpgradeButton extends Button:
 				text = current_state
 	
 	func _ready():
+		var id
 		self.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
-		self.pressed.connect(_pressed)
+		self.pressed.connect(_emit_upgrade_attempt)
 	
-	func _pressed():
+	func _emit_upgrade_attempt():
 		upgrade_attempted.emit(skill)
 		
 	func _init(button_skill: Skills.Skill):
