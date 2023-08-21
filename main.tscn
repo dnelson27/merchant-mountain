@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bkg4piaqm71jd"]
+[gd_scene load_steps=41 format=3 uid="uid://bkg4piaqm71jd"]
 
 [ext_resource type="Script" path="res://BottomMenu.gd" id="1_exgn3"]
 [ext_resource type="Script" path="res://NextCustomerButton.gd" id="2_b2c4n"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://EventMenuContinueButton.gd" id="14_62gpv"]
 [ext_resource type="Script" path="res://MarketModifier.gd" id="15_11u8i"]
 [ext_resource type="Script" path="res://StoreManagementExitButton.gd" id="16_02e4e"]
+[ext_resource type="Script" path="res://ManagementMenu.gd" id="16_dqa04"]
 [ext_resource type="Script" path="res://InventoryDisplayController.gd" id="16_nnymj"]
 [ext_resource type="Script" path="res://GameOver.gd" id="17_pq31a"]
 [ext_resource type="Script" path="res://LoanInterestDisplay.gd" id="17_r23il"]
@@ -230,37 +231,41 @@ offset_bottom = 644.0
 [node name="MarginPanel" type="Panel" parent="Control/StoreManagementMenu"]
 layout_mode = 2
 
-[node name="StoreManagementContainer" type="VBoxContainer" parent="Control/StoreManagementMenu"]
+[node name="ManagementMenu" type="TabContainer" parent="Control/StoreManagementMenu"]
+layout_mode = 2
+script = ExtResource("16_dqa04")
+
+[node name="StoreManagementContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/ManagementMenu"]
 layout_mode = 2
 
-[node name="StoreManagementExitButton" type="Button" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+[node name="StoreManagementExitButton" type="Button" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Exit"
 script = ExtResource("16_02e4e")
 
-[node name="StoreUpgradesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+[node name="StoreUpgradesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ExpensesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+[node name="ExpensesContainer" type="VBoxContainer" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Loans" type="VBoxContainer" parent="Control/StoreManagementMenu/StoreManagementContainer"]
+[node name="Loans" type="VBoxContainer" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer"]
 layout_mode = 2
 
-[node name="LoanInterestDisplay" type="RichTextLabel" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+[node name="LoanInterestDisplay" type="RichTextLabel" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer/Loans"]
 layout_mode = 2
 text = "Interest Rate: "
 fit_content = true
 script = ExtResource("17_r23il")
 
-[node name="LoanAmountLineEdit" type="LineEdit" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+[node name="LoanAmountLineEdit" type="LineEdit" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer/Loans"]
 layout_mode = 2
 script = ExtResource("18_xwuej")
 
-[node name="LoanSubmitButton" type="Button" parent="Control/StoreManagementMenu/StoreManagementContainer/Loans"]
+[node name="LoanSubmitButton" type="Button" parent="Control/StoreManagementMenu/ManagementMenu/StoreManagementContainer/Loans"]
 layout_mode = 2
 text = "Submit"
 
